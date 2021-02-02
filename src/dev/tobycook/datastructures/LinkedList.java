@@ -74,6 +74,34 @@ public class LinkedList {
   }
 
   /**
+   * Delete node by data.
+   * O(n) complexity.
+   * @param data the data
+   */
+  public void delete(int data) {
+    Node temp = head;
+    Node prev = null;
+
+    // If the head node contains key
+    if (temp != null && temp.data == data) {
+      head = temp.next;
+      return;
+    }
+
+    // Search for data to delete, tracking prev node
+    while (temp != null && temp.data != data) {
+      prev = temp;
+      temp = temp.next;
+    }
+
+    if (temp == null) {
+      return;
+    }
+
+    prev.next = temp.next;
+  }
+
+  /**
    * Find the node by the data.
    * O(n) complexity.
    * @param data the data
@@ -108,15 +136,15 @@ public class LinkedList {
     list.head = new Node(9);
     list.insert(8);
     list.insert(7);
-
     list.display();
+    // Output: 7 8 9
 
     list.append(10);
-
     list.display();
+    // Output: 7 8 9 10
 
-    Node searched = list.search(9);
-
-    System.out.println(searched);
+    list.delete(8);
+    list.display();
+    // Output: 7 9 10
   }
 }
